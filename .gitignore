@@ -3,3 +3,4 @@ models/*.pth
 __pycache__/
 .DS_Store
 data/
+sifre.txt
