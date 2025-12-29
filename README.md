@@ -1,37 +1,52 @@
-# NeuroSegment-3D: Volumetrik Beyin Tümörü Segmentasyonu
+# NeuroSegment-3D: Volumetric Brain Tumor Segmentation
 
-Bu proje, manyetik rezonans görüntüleme (MRI) verileri üzerinden beyin tümörlerini otomatik olarak tespit etmek ve 3 boyutlu uzayda bölütlemek (segmentasyon) amacıyla geliştirilmiş bir derin öğrenme uygulamasıdır.
+[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Live%20Demo-blue)](https://huggingface.co/spaces/berataydemir/NeuroSegment_3D)
 
-Sistem, geleneksel 2D kesit analizi yerine, MR görüntülerinin hacimsel (volumetric) yapısını koruyan 3D U-Net mimarisini temel alır. Bu yaklaşım, kesitler arasındaki mekansal derinlik bilgisinin korunmasını ve tümör sınırlarının daha yüksek doğrulukla belirlenmesini sağlar.
+This project is a deep learning-based system designed for the automated detection and volumetric segmentation of brain tumors from Magnetic Resonance Imaging (MRI) data. Utilizing a 3D U-Net architecture, the model processes NIfTI sequences to preserve spatial depth information, offering a significant advantage over traditional 2D slice-based analysis.
 
-## Proje Özeti
+## System Interface & Demonstration
 
-Tıbbi görüntü analizinde, özellikle beyin tümörü gibi karmaşık yapılarda, 2 boyutlu analizler bazen derinlik bilgisini kaçırabilir. Bu çalışmada, BraTS (Brain Tumor Segmentation) veri seti standartlarına uygun NIfTI (.nii.gz) formatındaki veriler işlenerek, tümörlü doku ve sağlıklı doku ayrımı yapılmaktadır.
+The system is deployed and accessible for research testing via Hugging Face Spaces. It features a professional radiology-grade interface for visualizing segmentation masks over anatomical structures.
 
-Model, PyTorch tabanlı MONAI (Medical Open Network for AI) kütüphanesi kullanılarak geliştirilmiş ve eğitilmiştir. Son kullanıcı için Gradio kütüphanesi ile interaktif bir web arayüzü oluşturulmuştur.
+![Interface Preview](demo_preview.png)
 
-## Teknik Mimari
+## Project Overview
 
-Model, Encoder-Decoder yapısına sahip 3D U-Net mimarisini kullanır.
+Medical image analysis, particularly in neuro-oncology, requires precise delineation of pathological tissue. This system leverages the MONAI (Medical Open Network for AI) framework to process volumetric data, identifying tumor regions with high spatial consistency.
 
-* **Giriş (Input):** 1 Kanal (T1c MRI Sekansı)
-* **Çıkış (Output):** 2 Kanal (Arkaplan ve Tümör Maskesi)
-* **Derinlik:** Model, 16 kanaldan başlayıp 256 kanala kadar derinleşen 5 seviyeli bir yapıya sahiptir.
-* **Optimizasyon:** Rezidüel Bloklar (Residual Units) kullanılarak eğitim verimliliği artırılmış ve gradyan kaybı minimize edilmiştir.
+### Key Technical Features
+* **Architecture:** 3D U-Net (Encoder-Decoder with Residual Units).
+* **Input Data:** Single-channel volumetric MRI (T1-weighted sequences).
+* **Output:** Binary segmentation masks (Tumor vs. Background).
+* **Processing:** Full volumetric inference (96x96x96 voxel resolution).
 
-## Kullanılan Teknolojiler
+## Technology Stack
 
-* **Python 3.10**
-* **PyTorch & MONAI:** Model eğitimi ve tensör işlemleri.
-* **Nibabel:** 3D tıbbi görüntü formatlarının (NIfTI) okunması ve işlenmesi.
-* **Gradio:** Modelin test edilmesi için geliştirilen web tabanlı kullanıcı arayüzü.
-* **Matplotlib & NumPy:** Veri görselleştirme ve matris manipülasyonu.
+* **Core Framework:** PyTorch & MONAI
+* **Data Handling:** Nibabel (NIfTI processing)
+* **Visualization:** Matplotlib & NumPy
+* **Deployment:** Gradio (Web Interface)
 
-## Kurulum ve Çalıştırma
+## Installation and Local Usage
 
-Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyebilirsiniz.
+To run the system locally, follow these steps:
 
-1. Depoyu klonlayın:
-   ```bash
-   git clone [https://github.com/berataydemirr/NeuroSegment-3D.git](https://github.com/berataydemirr/NeuroSegment-3D.git)
-   cd NeuroSegment-3D
+1.  **Clone the Repository:**
+    ```bash
+    git clone [https://github.com/berataydemirr/NeuroSegment-3D.git](https://github.com/berataydemirr/NeuroSegment-3D.git)
+    cd NeuroSegment-3D
+    ```
+
+2.  **Install Dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3.  **Launch the Application:**
+    ```bash
+    python app.py
+    ```
+
+## Disclaimer
+
+This software is developed for **academic and research purposes only**. It is not a certified medical device and should not be used for clinical diagnosis, treatment planning, or surgical guidance.
