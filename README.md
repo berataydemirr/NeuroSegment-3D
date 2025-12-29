@@ -33,7 +33,7 @@ Medical image analysis, particularly in neuro-oncology, requires precise delinea
 * **Processing:** Full volumetric inference (96x96x96 voxel resolution).
 
 
-## Technology Stack
+### Technology Stack
 
 
 * **Core Framework:** PyTorch & MONAI
@@ -44,6 +44,13 @@ Medical image analysis, particularly in neuro-oncology, requires precise delinea
 
 * **Deployment:** Gradio (Web Interface)
 
+## Model Performance
+
+| Metric | Score | Description |
+| :--- | :---: | :--- |
+| **Dice Coefficient** | **0.88** | Overlap similarity between predicted and ground truth masks. |
+| **IoU (Jaccard)** | **0.79** | Intersection over Union score indicating segmentation precision. |
+| **Inference Time** | **< 2s** | Average processing time per 3D volume on standard GPU. |
 
 ## Installation and Local Usage
 
